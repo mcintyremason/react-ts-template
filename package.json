@@ -21,7 +21,11 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "build-scss": "node-sass-chokidar src/styles/scss/app.scss -o src/styles/css/",
+    "uglify-css": "uglifycss src/styles/css/app.css > src/styles/css/app.min.css",
+    "build-css": "yarn build-scss && yarn uglify-css",
+    "watch-css": "yarn build-css && node-sass-chokidar src/styles/scss -o src/styles/css/ --watch --recursive",
+    "start": "yarn build-css && webpack-dev-server --open",
     "test": "mocha --recursive --require @babel/register --require ./test/setup.js --require ./test/dom.js --require ignore-styles 'src/**/*.spec{.ts,.tsx}'"
   },
   "devDependencies": {
@@ -47,6 +51,9 @@
     "ignore-styles": "^5.0.1",
     "jsdom": "^15.2.1",
     "mocha": "^6.2.2",
+    "node-sass": "^4.13.0",
+    "node-sass-chokidar": "^1.4.0",
+    "sass": "^1.23.7",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.0.1",
     "ts-loader": "^6.2.1",
@@ -54,6 +61,7 @@
     "tslint": "^5.20.1",
     "tslint-immutable": "^6.0.1",
     "typescript": "^3.7.3",
+    "uglifycss": "^0.0.29",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
