@@ -21,6 +21,19 @@
       "@babel/proposal-object-rest-spread"
     ]
   },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true  
+  },
   "scripts": {
     "start": "webpack-dev-server --open",
     "test": "nyc mocha --recursive --require @babel/register --require ./test/setup.js --require ./test/dom.js --require ignore-styles 'src/**/*.spec{.ts,.tsx}'"
